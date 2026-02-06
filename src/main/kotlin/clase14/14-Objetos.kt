@@ -1,5 +1,4 @@
 package clase14
-
 class Email(
     val asunto: String,
     val remitente: String,

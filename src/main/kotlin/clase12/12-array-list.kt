@@ -34,7 +34,6 @@ fun main(){
     println("Primer elemento: $primerElemento")
     println("Ultimo elemento: $ultimoElemento y su indice = $indexLastElement")
 
-
     println("\n=== EJERCICIO ===")
     println("Crea una lista mutable de asuntos de email y:")
     println("1. Agrega 3 asuntos diferentes")
@@ -44,12 +43,10 @@ fun main(){
 
     val asuntosEmail = mutableListOf<String>()
 
-
     asuntosEmail.add("Reunión de equipo")
     asuntosEmail.add("Reporte mensual")
     asuntosEmail.add("Invitación evento")
     println("Lista inicial: $asuntosEmail")
-
 
     asuntosEmail[1] = "Reporte semanal"
     println("Después de modificar: $asuntosEmail")
@@ -59,9 +56,4 @@ fun main(){
 
     println("Lista final: $asuntosEmail")
     println("Tamaño final: ${asuntosEmail.size}")
-
-/*
-
-*/
-
 }

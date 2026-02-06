@@ -1,7 +1,6 @@
 package clase16
 
 class EmailNormal(val asunto:String, val remitente:String, var leido: Boolean)
-
 data class EmailData(val asunto: String, val remitente: String, var leido: Boolean)
 
 fun main(){

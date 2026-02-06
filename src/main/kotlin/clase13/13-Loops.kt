@@ -60,6 +60,4 @@ fun main(){
     println("Lista final: $asuntosEmail")
     println("Tamaño final: ${asuntosEmail.size}")
 
-
-
 }

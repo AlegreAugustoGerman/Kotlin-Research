@@ -22,7 +22,6 @@ fun prioridadIntAEmailPriority(entero:Int): EmailPriority?{
         null
 }
 
-
 fun main(){
 
     println("========")
