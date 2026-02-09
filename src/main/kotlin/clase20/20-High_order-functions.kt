@@ -16,7 +16,6 @@ fun main(){
     val formatearEmail:(Email) -> String = { email ->
         "${email.subject} de ${email.sender}"
     }
-
     val emailFormateos = emails.map(formatearEmail)
 
     emails.map { email ->
@@ -34,7 +33,6 @@ fun main(){
     emailsFiltrados.forEachIndexed { index,email->
         println("Correo numero[$index]:$email")
     }
-
 
     val email1 = emails.get(0)
     val email2 = emails.get(1)
@@ -60,7 +58,6 @@ fun main(){
         onFound = { email -> println("Encontrado: ${email.subject}") },
         onNotFound = { println("No se encontró email urgente") }
     )
-
 
 
 }

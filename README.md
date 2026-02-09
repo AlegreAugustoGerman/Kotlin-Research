@@ -61,8 +61,32 @@ toString() legible.
 - Destructuring: Capacidad de extraer propiedades directamente en variables: val (asunto, remitente) = email.
 
 9. Enums con Comportamiento
-Los Enums en Kotlin no son solo etiquetas; son clases completas:
+- Los Enums en Kotlin no son solo etiquetas; son clases completas: Pueden tener propiedades y métodos.
+    Se integran perfectamente con when, garantizando que si se agrega un nuevo estado, el compilador avisará en cada lugar donde no se esté manejando.
 
-Pueden tener propiedades y métodos.
+10. Gestión Robusta de Errores:
+- Try-Catch como Expresión Kotlin:  moderniza el manejo de excepciones permitiendo que el bloque de error sea funcional:
+Try como Expresión: Al igual que if, un bloque try-catch puede retornar un valor directamente (ej. val resultado = try { a/b } catch { null }).
 
-Se integran perfectamente con when, garantizando que si se agrega un nuevo estado, el compilador avisará en cada lugar donde no se esté manejando.
+- Excepciones Personalizadas: Creación sencilla de excepciones de dominio (ej. EmailInvalidException) que heredan de Exception, facilitando la trazabilidad de errores de negocio.
+- Flujo Garantizado: Uso de finally para asegurar cierres de recursos o logs de finalización, independientemente del éxito del proceso.
+
+11. Extension Functions: Extensibilidad sin HerenciaUna de las herramientas más potentes , Permiten añadir funcionalidades a clases existentes (incluso de librerías externas o del propio lenguaje) 
+sin modificar su código fuente:Sintaxis: Se declaran como Clase.nuevaFuncion(). Ejemplo: String.isValidEmail() permite que cualquier cadena de texto se valide a sí misma.
+- Propiedades de Extensión: También se pueden añadir variables calculadas a clases (ej. String.emailDomain), mejorando la limpieza del código al evitar clases "Util" repletas de métodos estáticos.
+
+12. Funciones de Alto Orden y LambdasKotlin trata a las funciones como ciudadanos de primera clase, permitiendo crear código altamente reutilizable y asíncrono:Lambdas: Bloques de código que se pasan como variables (ej. val formatear = { email -> ... }).
+- Callbacks Profesionales: Capacidad de pasar funciones como parámetros (onSuccess, onError), ideal para peticiones a API o procesos de larga duración, permitiendo definir el comportamiento del éxito o error en el momento de la llamada.Operadores de Colecciones: Uso de .map, .filter, .find y .forEach para procesar datos de forma declarativa, evitando ciclos for manuales y reduciendo la probabilidad de errores de índice.
+
+13. Scope Functions: El "Sello" de un código Kotlin limpio
+- Estas funciones (let, apply, run, with, also) permiten ejecutar bloques de código dentro del contexto de un objeto, haciendo que el flujo sea más lineal y elegante:
+
+Función   |  Uso Principal                                                      | Qué retorna                       |
+let       | Ejecutar operaciones si un objeto no es nulo y transformar datos.   | El resultado de la última línea.  |
+apply     | Configurar o inicializar un objeto (modifica el objeto original).   | El objeto mismo.                  |
+also      | Acciones adicionales que no afectan al objeto (logs, validaciones). | El objeto mismo.                  |
+run       | Ejecutar una serie de pasos y computar un resultado final.          | El resultado de la última línea.  |
+with      | Acceder a múltiples propiedades de un objeto sin repetir su nombre. | El resultado de la última línea.  |
+
+
+ 
