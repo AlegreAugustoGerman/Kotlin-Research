@@ -81,12 +81,15 @@ sin modificar su código fuente:Sintaxis: Se declaran como Clase.nuevaFuncion().
 13. Scope Functions: El "Sello" de un código Kotlin limpio
 - Estas funciones (let, apply, run, with, also) permiten ejecutar bloques de código dentro del contexto de un objeto, haciendo que el flujo sea más lineal y elegante:
 
-Función   |  Uso Principal                                                      | Qué retorna                       |
-let       | Ejecutar operaciones si un objeto no es nulo y transformar datos.   | El resultado de la última línea.  |
-apply     | Configurar o inicializar un objeto (modifica el objeto original).   | El objeto mismo.                  |
-also      | Acciones adicionales que no afectan al objeto (logs, validaciones). | El objeto mismo.                  |
-run       | Ejecutar una serie de pasos y computar un resultado final.          | El resultado de la última línea.  |
-with      | Acceder a múltiples propiedades de un objeto sin repetir su nombre. | El resultado de la última línea.  |
+### Funciones de Alcance (Scope Functions) en Kotlin
+
+| Función | Uso Principal | Qué retorna |
+| :--- | :--- | :--- |
+| **let** | Ejecutar operaciones si un objeto no es nulo y transformar datos. | El resultado de la última línea. |
+| **apply** | Configurar o inicializar un objeto (modifica el objeto original). | El objeto mismo. |
+| **also** | Acciones adicionales que no afectan al objeto (logs, validaciones). | El objeto mismo. |
+| **run** | Ejecutar una serie de pasos y computar un resultado final. | El resultado de la última línea. |
+| **with** | Acceder a múltiples propiedades de un objeto sin repetir su nombre. | El resultado de la última línea. |
 
 
  
