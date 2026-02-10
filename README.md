@@ -91,5 +91,11 @@ sin modificar su código fuente:Sintaxis: Se declaran como Clase.nuevaFuncion().
 | **run** | Ejecutar una serie de pasos y computar un resultado final. | El resultado de la última línea. |
 | **with** | Acceder a múltiples propiedades de un objeto sin repetir su nombre. | El resultado de la última línea. |
 
+### ¿Cuándo elegir cada una? ¿Orden Superior o Lambdas?
+| :--- | :--- |  :--- | 
+Si la lógica es...	Usa...
+| **Simple** | (1 o 2 líneas)	| Una lambda directamente dentro de filter o map. |
+| **Repetitiva** | (la usas en 5 archivos) | Una función normal (fun) y la pasas como referencia. |
+| **Compleja** | (muchos cálculos) |	Una función normal para que el código sea legible. |
 
  
