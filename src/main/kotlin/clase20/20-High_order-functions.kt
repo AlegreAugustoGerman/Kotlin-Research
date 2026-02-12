@@ -59,11 +59,17 @@ fun main(){
     }
 
     val emailsFiltrados = emails.filter { email->
-        email.sender.first() == 'a'
-    }
-    val emailWithSubjectR = emails.last {
+        email.sender.first() == 'a'         // los chars no se comparan con string "a" por eso  un caracter individual se representa 'a'
+    } 
+    /*
+    La Lambda (Anónima): Lo que está dentro de { ... }. No tiene nombre.
+    La Variable (WithSubjectReference): Es la "caja" donde guardas lo que la lambda encontró.
+     * /
+
+    //la función dentro de las llaves { } es anónima, pero el resultado de esa función necesita un lugar donde guardarse para poder usarlo después.
+    val emailWithSubjectR = emails.last {//emailWithSubjectR El nombre es para el "Contenedor", no para la función
         it.subject.first().lowercase() == "r"  //es objetos solemos usar this.propiedad pero para lambdas se usa it.propiedad
-    }
+    }                     // con lowercase convertimos en minusculas y podemos comparar  permitiendo comparaciones entre objetos de cadena iguales. 
     println("${emailWithSubjectR}")
 
     /*
