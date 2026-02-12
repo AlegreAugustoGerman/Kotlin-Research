@@ -83,13 +83,13 @@ sin modificar su código fuente:Sintaxis: Se declaran como Clase.nuevaFuncion().
 
 ### Funciones de Alcance (Scope Functions) en Kotlin
 
-| Función | Uso Principal | Qué retorna |
-| :--- | :--- | :--- |
-| **let** | Ejecutar operaciones si un objeto no es nulo y transformar datos. | El resultado de la última línea. |
-| **apply** | Configurar o inicializar un objeto (modifica el objeto original). | El objeto mismo. |
-| **also** | Acciones adicionales que no afectan al objeto (logs, validaciones). | El objeto mismo. |
-| **run** | Ejecutar una serie de pasos y computar un resultado final. | El resultado de la última línea. |
-| **with** | Acceder a múltiples propiedades de un objeto sin repetir su nombre. | El resultado de la última línea. |
+| Función | Referencia | Retorno |   Caso de uso principal    | "Frase mental" para recordarla  |
+| :--- | :--- | :--- | :--- | :--- |
+| **let** |  it |	Resultado lambda    |	Operaciones con null-safety o transformar un objeto A en un resultado B. |	"Si no es nulo, haz esto con él." |
+| **apply** |  this |	El mismo objeto |	Configuración/Inicialización de atributos (patrón Builder).	 |  "Configura este objeto y devuélvemelo."  |
+| **also** |  	it |	El mismo objeto |	Acciones secundarias como Logs o validaciones sin alterar el flujo. |	"Y además, haz este log/print."
+| **run** |   this	| Resultado lambda |	Ejecutar lógica compleja y retornar un cálculo final. |	"Haz todo esto y dame el resultado." |
+| **with** |  this |	Resultado lambda |	Agrupar múltiples llamadas sobre un objeto que no es nulo. |	"Con este objeto, haz lo siguiente." |
 
 ### ¿Cuándo elegir cada una? ¿Orden Superior o Lambdas?
 
@@ -99,4 +99,40 @@ sin modificar su código fuente:Sintaxis: Se declaran como Clase.nuevaFuncion().
 | **Repetitiva** | (la usas en 5 archivos) | Una función normal (fun) y la pasas como referencia. |
 | **Compleja** | (muchos cálculos) |	Una función normal para que el código sea legible. |
 
- 
+- 💡 ¿Cuándo elegir cada una? (Análisis Profundo)
+
+1. ¿this o it?
+Usa funciones con this (apply, run, with) cuando quieras que el código parezca parte de la clase (puedes omitir this.). Ideal para modificar propiedades.
+Usa funciones con it (let, also) cuando el objeto se usa más como un parámetro de una función externa o cuando quieres renombrarlo para dar claridad: email.let { contenido -> ... }.
+
+2. El dilema de la legibilidad (Lambdas Gigantes)
+Si una lambda crece demasiado:
+Refactoriza: Si la lógica dentro de un run o let supera las 5-7 líneas, extrae esa lógica a una función privada (private fun).
+Referencia de función: Puedes pasar una función existente en lugar de abrir llaves:
+
+val resultado = email.let(::procesarLogicaCompleja)
+
+ 3. El dinamismo de los estados
+Para capturar un "estado anterior" antes de una modificación (como sugeriste en tu comentario), puedes combinar funciones:
+
+val estadoAnterior = email.subject
+email.apply { 
+    subject = "Nuevo Asunto" 
+}.also { 
+    println("Cambiado de $estadoAnterior a ${it.subject}") 
+}
+
+- 🛠️ Mejora de tu ejercicio validateEmail
+Hay un detalle técnico con trim(). Los Strings en Kotlin son inmutables. trim() devuelve un nuevo String, no modifica el original. Para que el apply sea efectivo, deberíamos usar el resultado del trim en la cadena de funciones:
+
+fun validateEmail(email: String?): Boolean {
+    // let maneja la nullabilidad
+    return email?.let { emailStr ->
+        emailStr.trim() // El resultado de esto pasa al siguiente
+            .also { println("Validando: $it") } 
+            .run { contains("@") && contains(".") } // El String limpio se valida aquí
+    } ?: false
+}
+
+En el caso de trim(), como genera un objeto nuevo, es mejor usarlo directamente o dentro de un let. apply es mejor cuando el objeto es mutable (como en la data class Email donde las propiedades son var).
+
