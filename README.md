@@ -145,3 +145,30 @@ En el caso de trim(), como genera un objeto nuevo, es mejor usarlo directamente 
 | ** protected ** |	Email y sus hijos. |	El estado isEncrypted. El hijo necesita saber si ya se cifró. |
 | ** internal ** |	Todo el "módulo" (App).	| Útil para librerías, pero poco usado en ejercicios simple |
 
+- 1. El "Contrato": ¿Debo traer todo?
+Tanto en Interfaces como en Clases Abstractas, si algo está marcado como abstract (o no tiene cuerpo en una interfaz), la clase que herede está obligada a implementar todo.
+
+En la Interfaz: Si tienes 5 funciones, tu clase debe escribir el código de esas 5 funciones. Si falta una, el código no compila.
+En la Clase Abstracta: Si declaras funciones como abstract, la subclase también está obligada a implementarlas.
+
+La gran diferencia: En una clase abstracta puedes tener funciones que ya tengan código (no abstractas). Esas funciones son opcionales de sobrescribir; las heredas gratis.
+
+
+-  Diferencias clave: Interface vs Abstract Class
+|Característica	| Interface |	Clase Abstracta |
+| :--- | :--- | :--- |  
+|Estado (Propiedades) |	No puede guardar "estado" (no puedes usar val x = 0 directamente con valor). |	Puede tener variables con estado real (campos). |
+|Herencia |	Una clase puede implementar muchas interfaces. |	Una clase solo puede heredar de una clase (abstracta o no). |
+|Propósito | Define una capacidad (un "qué puede hacer"). |	Define una identidad (un "qué es"). |
+|Constructor |	No tiene constructor. |	Puede tener constructor y pasarle parámetros. |
+
+3. ¿Cuándo usar cada una? (Escalabilidad)
+- Usa Interface cuando:
+1- Quieres definir un contrato puro (como tu repositorio).
+2- Sabes que diferentes clases pueden comportarse igual pero no tienen parentesco (ejemplo: un Email y un PDF pueden ser Imprimibles).
+3- Es lo mejor para Repositorios, porque permite cambiar fácilmente de InMemory a Room o Retrofit.
+- Usa Clase Abstracta cuando:
+1- Quieres compartir código común entre varias clases relacionadas para no repetir lógica.
+2- Necesitas un constructor o guardar variables privadas que las hijas usarán.
+
+Abstractas son clases concretas, que hereda la lógica común , Esta clase es un template: resuelve lo repetido y fuerza a que cada implementación defina su variante.
