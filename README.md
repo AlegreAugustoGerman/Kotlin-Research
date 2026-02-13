@@ -136,3 +136,12 @@ fun validateEmail(email: String?): Boolean {
 
 En el caso de trim(), como genera un objeto nuevo, es mejor usarlo directamente o dentro de un let. apply es mejor cuando el objeto es mutable (como en la data class Email donde las propiedades son var).
 
+### Diferencia clave de Modificadores 
+
+|Modificador |	¿Quién lo ve? |	Propósito en tu ejemplo |
+| :--- | :--- | :--- |  
+| ** public ** | (default)	Todo el mundo. |	El método send(). Es la interfaz del usuario. |
+| ** private ** |	Solo la clase Email. |	El password. Ni siquiera el hijo debe tocar la clave original. |
+| ** protected ** |	Email y sus hijos. |	El estado isEncrypted. El hijo necesita saber si ya se cifró. |
+| ** internal ** |	Todo el "módulo" (App).	| Útil para librerías, pero poco usado en ejercicios simple |
+
