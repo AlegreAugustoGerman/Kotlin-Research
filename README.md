@@ -172,3 +172,38 @@ La gran diferencia: En una clase abstracta puedes tener funciones que ya tengan 
 2- Necesitas un constructor o guardar variables privadas que las hijas usarán.
 
 Abstractas son clases concretas, que hereda la lógica común , Esta clase es un template: resuelve lo repetido y fuerza a que cada implementación defina su variante.
+
+
+### ¿Qué son las sealed classes en Kotlin y para qué sirven?
+
+Las sealed classes en Kotlin constituyen una poderosa herramienta que permite controlar la herencia de forma precisa y organizada desde una clase base específica. Esto significa que, cuando se desea limitar la cantidad o el tipo de subclases que derivan de una clase base, esta es la estructura adecuada para utilizar.
+
+¿Cómo modelar estados específicos de un correo electrónico usando sealed classes?
+
+Supongamos un caso práctico: estamos enviando un correo electrónico que puede encontrarse en diversos estados:
+
+Enviado correctamente.
+Falló al intentar enviarse.
+Guardado como borrador.
+Programado para enviarse más tarde.
+
+Ejemplos prácticos de estados con sealed classes
+
+Estado Enviado (Send): Puede incluir un parámetro indicando a quién se envió.
+Estado Fallido (Failed): Contiene un mensaje de error.
+Estado Borrador (Draft): No necesita parámetros, por lo que puede modelarse como un data object.
+Estado Programado (Scheduled): Contiene información referente al momento en que está programado para enviarse.
+
+¿Cómo integrar expresiones when con sealed classes?
+
+Una poderosa característica de las sealed classes es cómo interactúan con la expresión condicional when, permitiendo manejar cada estado explícitamente y obtener una estructura clara y fácil de mantener.
+
+Por ejemplo:
+
+
+when(emailStatus) {
+    is EmailStatus.Send -> println("Correo enviado a ${emailStatus.enviadoA}")
+    is EmailStatus.Failed -> println("Error: ${emailStatus.error}")
+    EmailStatus.Draft -> println("Correo guardado como borrador")
+    is EmailStatus.Scheduled -> println("Correo programado para: ${emailStatus.time}")
+}
